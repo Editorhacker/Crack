@@ -33,4 +33,14 @@ app.post("/register", async (req, res) => {
     res.status(201).json({ message: "User Registered Successfully!" });
 });
 
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email, password });
+    if (user) {
+        res.json({ success: true, message: "Login Successful" });
+    } else {
+        res.json({ success: false, message: "Invalid Credentials" });
+    }
+});
 app.listen(3000, () => console.log("Server running on port 3000"));
