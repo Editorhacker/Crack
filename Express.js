@@ -56,6 +56,17 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Fetch all users
+app.get("/users", async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching users" });
+    }
+});
+
+
 // Admin Registration
 app.post("/admin/register", async (req, res) => {
     const { name, email, password } = req.body;
