@@ -14,7 +14,7 @@ mongoose.connect("mongodb+srv://Crack:Crack@crackit.sqvqpyt.mongodb.net/", {
   .catch(err => console.log(err));
 
 const UserSchema = new mongoose.Schema({
-    name : String,
+    uname : String,
     email: String,
     password: String
 });
@@ -40,7 +40,7 @@ app.post("/register", async (req, res) => {
         return res.status(400).json({ message: "User already exists" });
     }
 
-    const newUser = new User({ name, email, password });
+    const newUser = new User({ uname, email, password });
     await newUser.save();
     res.status(201).json({ message: "User Registered Successfully!" });
 });
