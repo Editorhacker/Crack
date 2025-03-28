@@ -14,7 +14,7 @@ mongoose.connect("mongodb+srv://Crack:Crack@crackit.sqvqpyt.mongodb.net/", {
   .catch(err => console.log(err));
 
 const UserSchema = new mongoose.Schema({
-    uname : String,
+    name : String,
     email: String,
     password: String
 });
@@ -33,14 +33,14 @@ const Admin = mongoose.model("Admin", AdminSchema);
 
 
 app.post("/register", async (req, res) => {
-    const { uname, email, password } = req.body;
+    const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
         return res.status(400).json({ message: "User already exists" });
     }
 
-    const newUser = new User({ uname, email, password });
+    const newUser = new User({ name, email, password });
     await newUser.save();
     res.status(201).json({ message: "User Registered Successfully!" });
 });
