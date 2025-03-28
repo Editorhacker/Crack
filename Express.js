@@ -66,6 +66,23 @@ app.get("/users", async (req, res) => {
     }
 });
 
+// Delete a user by ID
+app.delete("/deleteUser/:id", async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({ message: "User deleted successfully!" });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting user" });
+    }
+});
+
+
 
 // Admin Registration
 app.post("/admin/register", async (req, res) => {
