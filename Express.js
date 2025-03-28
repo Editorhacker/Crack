@@ -33,7 +33,7 @@ const Admin = mongoose.model("Admin", AdminSchema);
 
 
 app.post("/register", async (req, res) => {
-    const { email, password } = req.body;
+    const { uname, email, password } = req.body;
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
